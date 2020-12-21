@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Top cases of corona virus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+<h1>Top cases of corona virus</h1>
+<p>This application lists the top number of cases reported across the globe</p>
+
+<div class="jumbotron">
+    
+    <p class="lead">Maximum cases across the global</p>
+
+</div>
+
+    <table class="table">
+        <tr>
+            <th>State</th>
+            <th>Country</th>
+            <th>Total cases reported</th>
+            <th>Changes since last day</th>
+        </tr>
+        <tr th:each="maxCases : ${maxCase}">
+            <td th:text="${maxCases.state}"></td>
+            <td th:text="${maxCases.country}"></td>
+            <td th:text="${maxCases.latestTotalCases}">0</td>
+            <td th:text="${maxCases.diffFromPrevDay}">0</td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>
