@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.compare.LocationStatisticsChainedComparator;
 import com.comparingCases.Casescomparator;
@@ -30,15 +31,15 @@ public class Control {
 
         return "home";
     }
-    @GetMapping("/top/")
-    public String top(Model model)
+    @GetMapping("/top/{maximum}")
+    public String top(@PathVariable("maximum") int maximum,Model model )
     {
     	List<LocationStatistics> all = coronaVirusDataService.getAllStats();
     	Casescomparator a=new Casescomparator();
 		Collections.sort(all, new LocationStatisticsChainedComparator(
                 new Casescomparator() )
         );
-		List<LocationStatistics> top=all.subList(all.size()-1,all.size());
+		List<LocationStatistics> top=all.subList(0,maximum);
     	model.addAttribute("maxCase",top);
     	return "home2";
     }
